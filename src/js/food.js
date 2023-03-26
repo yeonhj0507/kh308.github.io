@@ -60,23 +60,27 @@ xhr.onreadystatechange = function () {
     class lun  {
       constructor(){
         this.menu = "메뉴";
-        this.alergy = "알러지";
+        this.alergy = "";
       }
     }
 
     for (i=0; i<lunText.length; i++) {
-      var regExp = /\(([^)]+)\)/;
-      var matches = regExp.exec(lunText[i]);
-      tmpLun = new lun;
-      tmpLun.alergy = matches[1];
-
-      regExp = /\([^)]*\)/;
-      matches = lunText[i].replace(regExp, "");
+      if ((lunText[i].includes("("))) {
+        var regExp = /\(([^)]+)\)/;
+        var matches = regExp.exec(lunText[i]);
+        tmpLun = new lun;
+        tmpLun.alergy = matches[1];
       
-      tmpLun.menu = matches;
+        regExp = /\([^)]*\)/;
+        matches = lunText[i].replace(regExp, "");
+      
+        tmpLun.menu = matches;
 
-      console.log(tmpLun);
-
+        console.log(tmpLun);
+      } else {
+        tmpLun = new lun;
+        tmpLun.menu = lunText[i];
+      }
       lunText[i] = tmpLun;
     }
 
